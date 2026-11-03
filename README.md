@@ -51,8 +51,8 @@ STEP 9:For ‘N ‘ iterations ,do the following:<BR>
 STEP 10:Plot the error for each iteration <BR>
 STEP 11:Print the accuracy<BR>
 # PROGRAM:
-    ''' 
-    import numpy as np
+''' 
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -245,11 +245,11 @@ if prediction == 1:
 else:
   print("Prediction: Non-Diabetic") 
     
-    '''
+'''
 
 # OUTPUT:
 
-    '''
+    
     
     <img width="912" height="318" alt="image" src="https://github.com/user-attachments/assets/9e8c765e-997f-4daa-8c50-96657e56b6fb" />
 
@@ -271,7 +271,6 @@ else:
     <img width="825" height="550" alt="image" src="https://github.com/user-attachments/assets/1c59b3db-fe48-41e7-8327-5dedc8f70019" />
     <img width="871" height="595" alt="image" src="https://github.com/user-attachments/assets/e776e886-38b8-45e8-b97e-047b09eb5abf" />
 
-'''
 
 # RESULT:
  Thus, a single layer perceptron model is implemented using python to classify Iris data set.
