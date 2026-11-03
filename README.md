@@ -248,12 +248,9 @@ else:
 '''
 
 # OUTPUT:
+<img width="912" height="318" alt="image" src="https://github.com/user-attachments/assets/9e8c765e-997f-4daa-8c50-96657e56b6fb" />
 
-    
-    
-    <img width="912" height="318" alt="image" src="https://github.com/user-attachments/assets/9e8c765e-997f-4daa-8c50-96657e56b6fb" />
-
-    <img width="802" height="421" alt="image" src="https://github.com/user-attachments/assets/75b4c16c-b83b-48dd-9726-3a18e3084da7" />
+<img width="802" height="421" alt="image" src="https://github.com/user-attachments/assets/75b4c16c-b83b-48dd-9726-3a18e3084da7" />
 
     <img width="722" height="588" alt="image" src="https://github.com/user-attachments/assets/a6af921a-b0ae-4024-8d19-570e6b7104db" />
     
