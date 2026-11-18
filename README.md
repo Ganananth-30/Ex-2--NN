@@ -95,8 +95,6 @@ print(df.isnull().sum())
 print("\nDataset Shape After Preprocessing:")
 print(df.shape)
 
-
-
 # Class distribution
 df['Outcome'].value_counts().plot(kind='bar',title='Diabetes Class Distribution')
 
@@ -244,7 +242,8 @@ if prediction == 1:
     print("Prediction: Diabetic")
 else:
   print("Prediction: Non-Diabetic") 
-    
+
+'''
 '''
 
 # OUTPUT:
