@@ -51,6 +51,7 @@ STEP 9:For ‘N ‘ iterations ,do the following:<BR>
 STEP 10:Plot the error for each iteration <BR>
 STEP 11:Print the accuracy<BR>
 # PROGRAM:
+```
 ''' 
 import numpy as np
 import pandas as pd
@@ -241,9 +242,7 @@ if prediction == 1:
 else:
   print("Prediction: Non-Diabetic") 
 
-'''
-'''
-
+```
 # OUTPUT:
 <img width="912" height="318" alt="image" src="https://github.com/user-attachments/assets/9e8c765e-997f-4daa-8c50-96657e56b6fb" />
 
