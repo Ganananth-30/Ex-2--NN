@@ -71,134 +71,132 @@ print(df.shape)
 
 print("\nDataset Information:")
 print(df.info())
+ # Check missing values
+ print("Missing Values:")
+ print(df.isnull().sum())
 
-# Check missing values
-print("Missing Values:")
-print(df.isnull().sum())
+ # Remove duplicate records
+ df = df.drop_duplicates()
 
-# Remove duplicate records
-df = df.drop_duplicates()
+ # Replace impossible zero values with NaN
+ cols = ['Glucose', 'BloodPressure', 'SkinThickness','Insulin', 'BMI']
 
-# Replace impossible zero values with NaN
-cols = ['Glucose', 'BloodPressure', 'SkinThickness',
-        'Insulin', 'BMI']
+ df[cols] = df[cols].replace(0, np.nan)
 
-df[cols] = df[cols].replace(0, np.nan)
+ # Fill missing values using median
+ for col in cols:
+             df[col] = df[col].fillna(df[col].median())
 
-# Fill missing values using median
-for col in cols:
-            df[col] = df[col].fillna(df[col].median())
+  # Check duplicates and missing values again
+ print("\nMissing Values After Preprocessing:")
+ print(df.isnull().sum())
+ print("\nDataset Shape After Preprocessing:")
+ print(df.shape)
 
- # Check duplicates and missing values again
-print("\nMissing Values After Preprocessing:")
-print(df.isnull().sum())
-print("\nDataset Shape After Preprocessing:")
-print(df.shape)
+ # Class distribution
+ df['Outcome'].value_counts().plot(kind='bar',title='Diabetes Class Distribution')
 
-# Class distribution
-df['Outcome'].value_counts().plot(kind='bar',title='Diabetes Class Distribution')
+ plt.xlabel('Outcome (0 = Non-Diabetic, 1 = Diabetic)')
+ plt.ylabel('Count')
+ plt.show()
 
-plt.xlabel('Outcome (0 = Non-Diabetic, 1 = Diabetic)')
-plt.ylabel('Count')
-plt.show()
-
-        # Scatter plot
-plt.scatter(df[df['Outcome'] == 0]['Glucose'],
+  # Scatter plot
+ plt.scatter(df[df['Outcome'] == 0]['Glucose'],
                     df[df['Outcome'] == 0]['BMI'],
                                 label='Non-Diabetic')
 
-plt.scatter(df[df['Outcome'] == 1]['Glucose'],
+ plt.scatter(df[df['Outcome'] == 1]['Glucose'],
                                             df[df['Outcome'] == 1]['BMI'],
                                                         label='Diabetic')
-plt.xlabel('Glucose')
-plt.ylabel('BMI')
-plt.title('Diabetes Prediction')
-plt.legend()
-plt.show()
+ plt.xlabel('Glucose')
+ plt.ylabel('BMI')
+ plt.title('Diabetes Prediction')
+ plt.legend()
+ plt.show()
 
-X = df.drop('Outcome', axis=1).values
+ X = df.drop('Outcome', axis=1).values
 
-y = df['Outcome'].values
+ y = df['Outcome'].values
 
-print("Input Features:")
-print(X[:5])
+ print("Input Features:")
+ print(X[:5])
 
-print("\nTarget Output:")
-print(y[:5])
+ print("\nTarget Output:")
+ print(y[:5])
 
-X_train, X_test, y_train, y_test = train_test_split(
+ X_train, X_test, y_train, y_test = train_test_split(
       X, y,
           test_size=0.2,
               random_state=42,
                   stratify=y
                   )
 
-print("Training Data:", X_train.shape)
-print("Testing Data:", X_test.shape)
+ print("Training Data:", X_train.shape)
+ print("Testing Data:", X_test.shape)
 
-scaler = StandardScaler()
+ scaler = StandardScaler()
 
-X_train = scaler.fit_transform(X_train)
+ X_train = scaler.fit_transform(X_train)
 
-X_test = scaler.transform(X_test)
+ X_test = scaler.transform(X_test)
 
-print("Scaled Training Data:")
-print(X_train[:5])
+ print("Scaled Training Data:")
+ print(X_train[:5])
 
-X_train = np.c_[np.ones(X_train.shape[0]), X_train]
+ X_train = np.c_[np.ones(X_train.shape[0]), X_train]
 
-X_test = np.c_[np.ones(X_test.shape[0]), X_test]
+ X_test = np.c_[np.ones(X_test.shape[0]), X_test]
 
-print("Input Vector X:")
-print(X_train[:5])
+ print("Input Vector X:")
+ print(X_train[:5])
 
-Y_train = np.where(y_train == 1, 1, -1)
+ Y_train = np.where(y_train == 1, 1, -1)
 
-Y_test = np.where(y_test == 1, 1, -1)
+ Y_test = np.where(y_test == 1, 1, -1)
 
-print("Desired Output Y:")
-print(Y_train[:10])
+ print("Desired Output Y:")
+ print(Y_train[:10])
 
-W = np.zeros(X_train.shape[1])
+ W = np.zeros(X_train.shape[1])
 
-learning_rate = 0.01
+ learning_rate = 0.01
 
-epochs = 100
+  epochs = 100
 
-print("Initial Weight Vector:")
-print(W)
+ print("Initial Weight Vector:")
+ print(W)
 
-print("Learning Rate:", learning_rate)
+ print("Learning Rate:", learning_rate)
+ 
+ errors = []
 
-errors = []
-
-for epoch in range(epochs):
-    total_error = 0
-    for i in range(len(X_train)):
-        v = np.dot(W, X_train[i])
-        T = 1 if v >= 0 else -1
-        if Y_train[i] != T:
+ for epoch in range(epochs):
+     total_error = 0
+     for i in range(len(X_train)):
+         v = np.dot(W, X_train[i])
+         T = 1 if v >= 0 else -1
+         if Y_train[i] != T:
             W = W + learning_rate * (Y_train[i] - T) * X_train[i]
             total_error += 1
     errors.append(total_error)
 
-print("Final Weight Vector:")
-print(W)
+ print("Final Weight Vector:")
+ print(W)
 
-plt.plot(range(1, epochs + 1), errors, marker='o')
-plt.xlabel('Epochs')
-plt.ylabel('Number of Errors')
+ plt.plot(range(1, epochs + 1), errors, marker='o')
+ plt.xlabel('Epochs')
+ plt.ylabel('Number of Errors')
 
-plt.title('Perceptron Training Error')
+ plt.title('Perceptron Training Error')
 
-plt.grid()
-plt.show()
+ plt.grid()
+ plt.show()
 
-y_pred = []
+ y_pred = []
 
-for i in range(len(X_test)):
-  v = np.dot(W, X_test[i])
-  T = 1 if v >= 0 else -1
+ for i in range(len(X_test)):
+   v = np.dot(W, X_test[i])
+   T = 1 if v >= 0 else -1
   y_pred.append(T)
 y_pred = np.array(y_pred)
 accuracy = accuracy_score(Y_test, y_pred)
